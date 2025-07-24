@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: DynamoDB table for arrival card
+
+Resources:
+  EntriesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: arrival_card
+      AttributeDefinitions:
+        - AttributeName: id_number
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id_number
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+
+
