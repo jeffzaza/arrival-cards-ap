@@ -1,0 +1,50 @@
+{
+    "family": "arrival-cards-task",
+    "containerDefinitions": [
+        {
+            "name": "arrival-cards-api",
+            "image": "492815614584.dkr.ecr.ap-southeast-1.amazonaws.com/arrival-cards-api",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "arrival-cards-api-5000-tcp",
+                    "containerPort": 5000,
+                    "hostPort": 5000,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "DYNAMODB_TABLE_NAME",
+                    "value": "arrival_card"
+                },
+                {
+                    "name": "AWS_REGION",
+                    "value": "ap-southeast-1"
+                }
+            ],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/arrival-cards-api",
+                    "awslogs-region": "ap-southeast-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            },
+            "systemControls": []
+        }
+    ],
+    "taskRoleArn": "arn:aws:iam::492815614584:role/arrival-cards-task-role",
+    "executionRoleArn": "arn:aws:iam::492815614584:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "volumes": [],
+    "placementConstraints": [],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "256",
+    "memory": "512"
+}
